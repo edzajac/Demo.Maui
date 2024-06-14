@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:BaseView
+    x:Class="Demo.Maui.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:Demo.Maui.Views.Base"
+    xmlns:vm="clr-namespace:Demo.Maui.ViewModels"
+    xmlns:models="clr-namespace:Demo.Maui.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:DataType="vm:MainPageViewModel">
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Margin="0">
+        <RefreshView
+            Margin="4,12,0,0"
+            IsRefreshing="{Binding IsRefreshing}"
+            VerticalOptions="FillAndExpand"
+            Command="{Binding RefreshCommand}"
+            RefreshColor="{StaticResource Magenta}"
+            IsVisible="{Binding IsLoading, Converter={toolkit:InvertedBoolConverter}}">
+            <Grid>
+                <CollectionView
+                    x:Name="GenreCollection"
+                    SelectionMode="None"
+                    ItemsSource="{Binding FilmsByGenre}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="models:Genre">
+                                <VerticalStackLayout
+                                    Margin="0,24,0,0"
+                                    HeightRequest="284"
+                                    Spacing="8">
+
+                                    <Label
+                                        Style="{StaticResource Headline}"
+                                        Text="{Binding name}"
+                                        Margin="16,0,0,0"/>
+
+                                    <ScrollView
+                                        Orientation="Horizontal">
+                                        <HorizontalStackLayout
+                                            Margin="8,0,0,0">
+                                            <CollectionView
+                                                ItemsSource="{Binding associated_films}"
+                                                ItemsLayout="HorizontalList"
+                                                SelectionMode="None">
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate
+                                                        x:DataType="models:Film">
+                                                        <VerticalStackLayout
+                                                            Margin="0">
+
+                                                            <ImageButton
+                                                                Source="{Binding poster_url, Converter={StaticResource UriToImageSourceConverter}}"
+                                                                Command="{Binding Path=BindingContext.NavigateToAboutFilmPageCommand, Source={x:Reference Name=GenreCollection}}"
+                                                                CommandParameter="{Binding id}"
+                                                                Aspect="AspectFill"
+                                                                Margin="0,0,8,0"/>
+
+                                                        </VerticalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </HorizontalStackLayout>
+                                    </ScrollView>
+                                </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </RefreshView>
+        <Grid
+            IsVisible="{Binding IsLoading}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowDefinitions="*,Auto,*"
+            ColumnDefinitions="*,Auto,*"
+            BackgroundColor="Black"
+            Opacity="0.3">
+
+            <ActivityIndicator
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                VerticalOptions="StartAndExpand"
+                IsRunning="{Binding IsLoading}"/>
+
+        </Grid>
+    </Grid>
+</base:BaseView>

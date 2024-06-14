@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Demo.Maui.Controls.FilmRatingDisplay">
+    <VerticalStackLayout>
+        <Grid
+            x:Name="FilmRatingDisplayGrid"
+            HorizontalOptions="Start"
+            ColumnSpacing="2"
+            RowDefinitions="30"/>
+        <Label
+            HorizontalOptions="Start"
+            TextColor="{StaticResource Gray100}"
+            FontSize="16"
+            Margin="0,16,0,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span x:Name="RatedCountLabel"/>
+                    <Span Text=" ratings"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </VerticalStackLayout>
+</ContentView>
+
