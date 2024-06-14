@@ -1,6 +1,6 @@
 # .NET Maui - Movie Demo 
 
-This repository contains the code for the movie coding challenge issued by Square6. The functions of this application include the ability to view the latest popular films of the day by genre and to select a specific film and view more information about the film.
+This repository contains the code for a mobile application that shares information about movies. The functions of this application include the ability to view the latest popular films of the day by genre and to select a specific film and view more information about the film.
 
 ## Getting Started
 
