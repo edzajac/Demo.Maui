@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Demo.Maui\Demo.Maui.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="MockServices\" />
+    <None Remove="ViewModelTests\" />
+    <None Remove="ViewModelTests\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MockServices\" />
+    <Folder Include="ViewModelTests\" />
+    <Folder Include="ViewModelTests\Base\" />
+  </ItemGroup>
+</Project>
